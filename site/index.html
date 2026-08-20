@@ -113,7 +113,9 @@
          viewport with motion allowed, so it can never delay first paint. -->
     <img class="hero-poster" src="assets/video/winwood-pool-poster.jpg" alt="" aria-hidden="true" fetchpriority="high">
     <video class="hero-video" data-src="assets/video/winwood-pool.mp4"
-           muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
+           muted loop playsinline preload="none" disablepictureinpicture
+           controlslist="nodownload noplaybackrate noremoteplayback"
+           aria-hidden="true" tabindex="-1"></video>
   </div>
   <div class="wrap hero-inner">
     <div class="hero-copy">
@@ -891,7 +893,9 @@
   <div class="offer-video">
     <video id="offer-loop" data-src="assets/video/offer-loop.mp4"
            poster="assets/video/offer-poster.jpg"
-           muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
+           muted loop playsinline preload="none" disablepictureinpicture
+           controlslist="nodownload noplaybackrate noremoteplayback"
+           aria-hidden="true" tabindex="-1"></video>
   </div>
 
   <div class="offer-body">
@@ -920,7 +924,7 @@
         aria-label="Open the current offering">
   <video id="offer-bubble-loop" data-src="assets/video/offer-loop.mp4"
          poster="assets/video/offer-poster.jpg"
-         muted loop playsinline preload="none" aria-hidden="true"></video>
+         muted loop playsinline preload="none" disablepictureinpicture aria-hidden="true"></video>
 </button>
 
 

@@ -2040,3 +2040,12 @@ td.is-ours .cmp-yes, td.is-ours.cmp-yes { color: #21603A; }
   border-bottom: 1px solid rgba(217,190,135,.22);
 }
 .draft-bar strong { color: #fff; font-weight: 600; }
+
+/* Decorative video: hide every native control affordance, including the
+   picture-in-picture button some browsers overlay on hover. */
+.offer-video video::-webkit-media-controls,
+.offer-bubble video::-webkit-media-controls,
+.hero-video::-webkit-media-controls { display: none !important; }
+.offer-video video::-internal-media-controls-overlay-cast-button,
+.hero-video::-internal-media-controls-overlay-cast-button { display: none; }
+.offer-video video, .offer-bubble video, .hero-video { pointer-events: none; }

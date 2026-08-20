@@ -302,10 +302,15 @@
 
     function startLoop(v) {
       if (!v || v.dataset.started) return;
+      if (reduceMotion) return;              // poster stands in
       v.dataset.started = '1';
-      v.src = v.getAttribute('data-src');
-      var p = v.play();
-      if (p && p.catch) p.catch(function () { /* poster stands in */ });
+      var go = function () {
+        v.src = v.getAttribute('data-src');
+        var p = v.play();
+        if (p && p.catch) p.catch(function () { /* poster stands in */ });
+      };
+      if (document.readyState === 'complete') go();
+      else window.addEventListener('load', go, { once: true });
     }
 
     function openCard() {
@@ -314,7 +319,7 @@
       bubble.classList.remove('is-open');
       // next frame so the transition runs
       requestAnimationFrame(function () { card.classList.add('is-open'); });
-      if (!reduceMotion) startLoop(loop);
+      startLoop(loop);
       shown = true;
     }
 
@@ -324,31 +329,26 @@
         card.hidden = true;
         bubble.hidden = false;
         requestAnimationFrame(function () { bubble.classList.add('is-open'); });
-        if (!reduceMotion) startLoop(bubbleLoop);
+        startLoop(bubbleLoop);
       }, 380);
       try { window.localStorage.setItem(KEY, String(Date.now())); } catch (e) {}
     }
 
-    // Appear on engagement: a quarter of the page scrolled, or 12 seconds.
-    function maybeShow() {
-      if (shown) return;
-      var h = document.body.scrollHeight - window.innerHeight;
-      if (h > 0 && window.pageYOffset / h > 0.25) reveal();
-    }
+    // Appears straight away. The short delay is only so the entrance
+    // transition is visible rather than the card simply being there on
+    // first paint, and so it does not land on top of the hero animation.
     function reveal() {
       if (shown) return;
-      window.removeEventListener('scroll', maybeShow);
       if (dismissedRecently()) {
         bubble.hidden = false;
         requestAnimationFrame(function () { bubble.classList.add('is-open'); });
-        if (!reduceMotion) startLoop(bubbleLoop);
+        startLoop(bubbleLoop);
         shown = true;
         return;
       }
       openCard();
     }
-    window.addEventListener('scroll', maybeShow, { passive: true });
-    setTimeout(reveal, 12000);
+    setTimeout(reveal, 400);
 
     card.querySelector('.offer-close').addEventListener('click', collapse);
     bubble.addEventListener('click', function () {
