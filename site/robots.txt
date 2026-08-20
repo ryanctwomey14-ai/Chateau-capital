@@ -1,0 +1,5 @@
+# Staging build. Nothing here should be indexed.
+# At production launch: remove these Disallow lines, drop the noindex meta
+# tags from every page, and point Sitemap at the live domain.
+User-agent: *
+Disallow: /

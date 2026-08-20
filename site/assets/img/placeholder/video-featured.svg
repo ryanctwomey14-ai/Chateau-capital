@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720" role="img" aria-label="Founder story, thumbnail 1280x720">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#023D7A"/>
+      <stop offset="0.55" stop-color="#003466"/>
+      <stop offset="1" stop-color="#011E3C"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.78" cy="0.16" r="0.7">
+      <stop offset="0" stop-color="#1898E2" stop-opacity="0.34"/>
+      <stop offset="1" stop-color="#1898E2" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="win" width="49" height="40" patternUnits="userSpaceOnUse">
+      <rect x="0" y="0" width="4" height="3" fill="#ffffff" opacity="0.055"/>
+    </pattern>
+  </defs>
+  <rect width="1280" height="720" fill="url(#g)"/>
+  <rect width="1280" height="720" fill="url(#win)"/>
+  <rect width="1280" height="720" fill="url(#glow)"/>
+  <g opacity="0.13" fill="#ffffff">
+    <rect x="-20" y="580" width="65" height="140"/>
+    <rect x="51" y="589" width="132" height="131"/>
+    <rect x="189" y="600" width="121" height="120"/>
+    <rect x="316" y="607" width="70" height="113"/>
+    <rect x="392" y="566" width="67" height="154"/>
+    <rect x="465" y="560" width="122" height="160"/>
+    <rect x="593" y="648" width="73" height="72"/>
+    <rect x="672" y="559" width="113" height="161"/>
+    <rect x="791" y="628" width="107" height="92"/>
+    <rect x="904" y="572" width="78" height="148"/>
+    <rect x="988" y="616" width="59" height="104"/>
+    <rect x="1053" y="605" width="105" height="115"/>
+    <rect x="1164" y="609" width="62" height="111"/>
+    <rect x="1232" y="635" width="124" height="85"/>
+  </g>
+  <g transform="translate(640 360)" text-anchor="middle">
+    <rect x="-46" y="-35" width="7" height="7" fill="#B08D4F"/>
+    <rect x="-32" y="-35" width="7" height="7" fill="#B08D4F"/>
+    <rect x="-18" y="-35" width="7" height="7" fill="#B08D4F"/>
+    <rect x="-4" y="-35" width="7" height="7" fill="#B08D4F"/>
+    <rect x="10" y="-35" width="7" height="7" fill="#B08D4F"/>
+    <rect x="24" y="-35" width="7" height="7" fill="#B08D4F"/>
+    <rect x="38" y="-35" width="7" height="7" fill="#B08D4F"/>
+    <text y="0" font-family="Georgia, serif" font-size="34" fill="#D9BE87" letter-spacing="3">FEATURED VIDEO</text>
+    <text y="52" font-family="Helvetica, Arial, sans-serif" font-size="23" fill="#ffffff" opacity="0.62">Founder story, thumbnail 1280x720</text>
+    <text y="92" font-family="Helvetica, Arial, sans-serif" font-size="18" fill="#ffffff" opacity="0.34">PLACEHOLDER 1280 x 720 &#183; REPLACE BEFORE LAUNCH</text>
+  </g>
+</svg>

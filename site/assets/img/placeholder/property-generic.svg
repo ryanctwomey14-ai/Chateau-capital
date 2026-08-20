@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500" role="img" aria-label="Community exterior">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#023D7A"/>
+      <stop offset="0.55" stop-color="#003466"/>
+      <stop offset="1" stop-color="#011E3C"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.78" cy="0.16" r="0.7">
+      <stop offset="0" stop-color="#1898E2" stop-opacity="0.34"/>
+      <stop offset="1" stop-color="#1898E2" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="win" width="30" height="27" patternUnits="userSpaceOnUse">
+      <rect x="0" y="0" width="2" height="2" fill="#ffffff" opacity="0.055"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="500" fill="url(#g)"/>
+  <rect width="800" height="500" fill="url(#win)"/>
+  <rect width="800" height="500" fill="url(#glow)"/>
+  <g opacity="0.13" fill="#ffffff">
+    <rect x="-20" y="431" width="61" height="69"/>
+    <rect x="47" y="435" width="86" height="65"/>
+    <rect x="139" y="449" width="56" height="51"/>
+    <rect x="201" y="442" width="88" height="58"/>
+    <rect x="295" y="425" width="70" height="75"/>
+    <rect x="371" y="449" width="46" height="51"/>
+    <rect x="423" y="397" width="50" height="103"/>
+    <rect x="479" y="450" width="81" height="50"/>
+    <rect x="566" y="419" width="79" height="81"/>
+    <rect x="651" y="445" width="81" height="55"/>
+    <rect x="738" y="385" width="56" height="115"/>
+    <rect x="800" y="408" width="54" height="92"/>
+  </g>
+  <g transform="translate(400 250)" text-anchor="middle">
+    <rect x="-33" y="-25" width="5" height="5" fill="#B08D4F"/>
+    <rect x="-23" y="-25" width="5" height="5" fill="#B08D4F"/>
+    <rect x="-13" y="-25" width="5" height="5" fill="#B08D4F"/>
+    <rect x="-3" y="-25" width="5" height="5" fill="#B08D4F"/>
+    <rect x="7" y="-25" width="5" height="5" fill="#B08D4F"/>
+    <rect x="17" y="-25" width="5" height="5" fill="#B08D4F"/>
+    <rect x="27" y="-25" width="5" height="5" fill="#B08D4F"/>
+    <text y="0" font-family="Georgia, serif" font-size="23" fill="#D9BE87" letter-spacing="2">PROPERTY</text>
+    <text y="38" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#ffffff" opacity="0.62">Community exterior</text>
+    <text y="67" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#ffffff" opacity="0.34">PLACEHOLDER 800 x 500 &#183; REPLACE BEFORE LAUNCH</text>
+  </g>
+</svg>
