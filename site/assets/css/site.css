@@ -1897,7 +1897,7 @@ td.is-ours .cmp-yes, td.is-ours.cmp-yes { color: #21603A; }
   position: fixed;
   right: 20px; bottom: 20px;
   z-index: 95;
-  width: 306px;
+  width: 330px;
   background: var(--white);
   border: 1px solid var(--line);
   border-radius: 6px;
@@ -1913,7 +1913,7 @@ td.is-ours .cmp-yes, td.is-ours.cmp-yes { color: #21603A; }
 /* Status strip */
 .offer-top {
   display: flex; align-items: center; justify-content: space-between; gap: 10px;
-  padding: 9px 10px 9px 13px;
+  padding: 11px 12px 11px 18px;
   background: var(--navy-900);
 }
 .offer-live {
@@ -1960,24 +1960,22 @@ td.is-ours .cmp-yes, td.is-ours.cmp-yes { color: #21603A; }
   background: linear-gradient(180deg, rgba(6,14,22,0) 45%, rgba(6,14,22,.55) 100%);
   pointer-events: none;
 }
-@media (hover: hover) and (pointer: fine) {
-  .offer-video:hover 
 /* Body */
-.offer-body { padding: 14px 15px 15px; }
+.offer-body { padding: 18px 20px 20px; }
 .offer-eyebrow {
   font-size: .62rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
   color: var(--brass); margin: 0 0 5px;
 }
 .offer-title {
   font-family: var(--f-display);
-  font-size: 1.06rem; font-weight: 600; line-height: 1.25;
-  color: var(--navy-900); margin: 0 0 4px;
+  font-size: 1.1rem; font-weight: 600; line-height: 1.25;
+  color: var(--navy-900); margin: 0 0 5px;
 }
-.offer-sub { font-size: .8rem; color: var(--muted); margin: 0 0 12px; line-height: 1.45; }
+.offer-sub { font-size: .81rem; color: var(--muted); margin: 0 0 2px; line-height: 1.5; }
 
 .offer-stats {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
-  padding: 10px 0; margin-bottom: 12px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 14px 12px;
+  padding: 14px 0; margin-bottom: 16px;
   border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
 }
 .offer-stats div { }
@@ -1990,9 +1988,9 @@ td.is-ours .cmp-yes, td.is-ours.cmp-yes { color: #21603A; }
   color: var(--navy-900); font-variant-numeric: tabular-nums;
 }
 
-.offer-actions { display: grid; gap: 7px; }
-.offer-actions .btn { padding: 10px 14px; font-size: .82rem; width: 100%; }
-.offer-note { font-size: .62rem; color: var(--muted); margin: 9px 0 0; line-height: 1.5; }
+.offer-actions { display: grid; gap: 9px; }
+.offer-actions .btn { padding: 12px 14px; font-size: .84rem; width: 100%; }
+.offer-note { font-size: .66rem; color: var(--muted); margin: 12px 0 0; line-height: 1.55; }
 
 /* --- Collapsed bubble ---------------------------------------------------- */
 .offer-bubble {
@@ -2017,15 +2015,12 @@ td.is-ours .cmp-yes, td.is-ours.cmp-yes { color: #21603A; }
   .offer-bubble:hover { transform: scale(1.06); }
 }
 
-  background: rgba(1,30,60,.6); color: #fff; top: 10px; right: 10px; z-index: 3;
-}
-
 /* --- Small screens ------------------------------------------------------
    The sticky CTA bar already owns the bottom edge on mobile, so the widget
    sits above it and defaults to the bubble rather than the full card. */
 @media (max-width: 1040px) {
   .offer, .offer-bubble { bottom: 86px; right: 14px; }
-  .offer { width: min(300px, calc(100vw - 28px)); }
+  .offer { width: min(330px, calc(100vw - 28px)); }
 }
 @media (max-width: 380px) {
   .offer-bubble { width: 54px; height: 54px; }
