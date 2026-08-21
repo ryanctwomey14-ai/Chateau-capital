@@ -288,9 +288,11 @@
 
     var KEY = 'cc-offer-dismissed';
     var HIDE_DAYS = 7;
+    var pill = document.getElementById('offer-pill');
     var loop = document.getElementById('offer-loop');
     var bubbleLoop = document.getElementById('offer-bubble-loop');
     var shown = false;
+    var isPhone = function () { return window.matchMedia('(max-width: 767px)').matches; };
 
     function dismissedRecently() {
       try {
@@ -313,24 +315,38 @@
       else window.addEventListener('load', go, { once: true });
     }
 
-    function openCard() {
-      card.hidden = false;
-      bubble.hidden = true;
+    function show(el) {
+      el.hidden = false;
+      void el.offsetHeight;            // force reflow so the transition runs
+      el.classList.add('is-open');
+    }
+
+    function hideCollapsed() {
       bubble.classList.remove('is-open');
-      // next frame so the transition runs
-      requestAnimationFrame(function () { card.classList.add('is-open'); });
+      bubble.hidden = true;
+      if (pill) { pill.classList.remove('is-open'); pill.hidden = true; }
+    }
+
+    function showCollapsed() {
+      // Phones get the labelled pill, desktop gets the video bubble.
+      var el = (isPhone() && pill) ? pill : bubble;
+      card.classList.remove('is-open');
+      card.hidden = true;
+      show(el);
+      if (el === bubble) startLoop(bubbleLoop);
+      shown = true;
+    }
+
+    function openCard() {
+      hideCollapsed();
+      show(card);
       startLoop(loop);
       shown = true;
     }
 
     function collapse() {
       card.classList.remove('is-open');
-      setTimeout(function () {
-        card.hidden = true;
-        bubble.hidden = false;
-        requestAnimationFrame(function () { bubble.classList.add('is-open'); });
-        startLoop(bubbleLoop);
-      }, 380);
+      setTimeout(showCollapsed, 380);
       try { window.localStorage.setItem(KEY, String(Date.now())); } catch (e) {}
     }
 
@@ -339,11 +355,10 @@
     // first paint, and so it does not land on top of the hero animation.
     function reveal() {
       if (shown) return;
-      if (dismissedRecently()) {
-        bubble.hidden = false;
-        requestAnimationFrame(function () { bubble.classList.add('is-open'); });
-        startLoop(bubbleLoop);
-        shown = true;
+      // On a phone the full card covers most of the screen, so it opens as
+      // the bubble and expands only when tapped.
+      if (isPhone() || dismissedRecently()) {
+        showCollapsed();
         return;
       }
       openCard();
@@ -351,9 +366,17 @@
     setTimeout(reveal, 400);
 
     card.querySelector('.offer-close').addEventListener('click', collapse);
-    bubble.addEventListener('click', function () {
+    function expand() {
       try { window.localStorage.removeItem(KEY); } catch (e) {}
       openCard();
+    }
+    bubble.addEventListener('click', expand);
+    if (pill) pill.addEventListener('click', expand);
+
+    // Swap the collapsed control if the device is rotated across the
+    // breakpoint while the widget is collapsed.
+    window.addEventListener('resize', function () {
+      if (shown && card.hidden) showCollapsed();
     });
 
   })();

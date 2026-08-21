@@ -76,6 +76,17 @@ The script splices the partials in and sets `aria-current="page"` on the matchin
 Pushing to `main` publishes `site/` to GitHub Pages via
 `.github/workflows/deploy.yml`. There is no build step; the directory is uploaded as-is.
 
+**After changing `site.css` or any JS, run the cache stamper before committing:**
+
+```bash
+python site/_partials/stamp.py
+```
+
+It rewrites every `site.css` / `site.js` reference with a short hash of the file's
+contents. Without it, a returning visitor can receive new HTML alongside a cached
+stylesheet, which is how a deploy ends up broken for exactly the people who visited
+before.
+
 ---
 
 ## Before this goes live

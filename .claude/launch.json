@@ -4,8 +4,14 @@
     {
       "name": "chateau-site",
       "runtimeExecutable": "python",
-      "runtimeArgs": ["-m", "http.server", "4321", "--directory", "site"],
-      "port": 4321
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "4399",
+        "--directory",
+        "site"
+      ],
+      "port": 4399
     }
   ]
 }

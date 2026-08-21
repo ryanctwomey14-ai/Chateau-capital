@@ -2049,3 +2049,284 @@ td.is-ours .cmp-yes, td.is-ours.cmp-yes { color: #21603A; }
 .offer-video video::-internal-media-controls-overlay-cast-button,
 .hero-video::-internal-media-controls-overlay-cast-button { display: none; }
 .offer-video video, .offer-bubble video, .hero-video { pointer-events: none; }
+
+/* ==========================================================================
+   P24. Mobile optimisation
+   Written after auditing the real rendering at 375px. Everything here fixes
+   something that was measurably wrong, rather than pre-emptive tweaking.
+   ========================================================================== */
+
+/* --- Grids that were locked multi-column by inline styles --------------- */
+.grid.bento { grid-template-columns: 1.4fr 1fr 1fr; align-items: stretch; }
+.bento-wide { grid-column: span 2; }
+@media (max-width: 940px) {
+  .grid.bento { grid-template-columns: 1fr 1fr; }
+  .bento-wide { grid-column: span 2; }
+}
+@media (max-width: 620px) {
+  .grid.bento { grid-template-columns: 1fr; }
+  .bento-wide { grid-column: auto; }
+}
+
+.team-grid.is-three { grid-template-columns: repeat(3, 1fr); }
+@media (max-width: 620px) { .team-grid.is-three { grid-template-columns: repeat(2, 1fr); } }
+
+.flow.is-four { grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 900px) { .flow.is-four { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 520px) { .flow.is-four { grid-template-columns: 1fr; } }
+
+.step.is-compact { grid-template-columns: 56px 1fr; padding: var(--sp-3) 0; }
+@media (max-width: 640px) {
+  .step.is-compact { grid-template-columns: 1fr; gap: var(--sp-1); }
+}
+
+/* --- Tap targets --------------------------------------------------------
+   Audit found link-arrows at 25px, footer links at 17px and the menu button
+   at 38px. Apple and Material both put the floor at 44px. */
+@media (max-width: 1040px) {
+  .nav-toggle { padding: 13px; margin-right: -13px; }
+
+  .link-arrow { min-height: 44px; align-items: center; }
+
+  .footer-col ul { gap: 2px; }
+  .footer-col a,
+  .footer-bottom a {
+    display: inline-flex; align-items: center;
+    min-height: 44px;
+  }
+  .footer-legal a { padding-block: 4px; }
+
+  .breadcrumb a { display: inline-block; padding-block: 8px; }
+
+  .acc-trigger { padding-block: 20px; }
+
+  .nav-sub a { min-height: 44px; }
+}
+
+/* --- Type ---------------------------------------------------------------
+   Nothing below 12px on a phone. iOS also zooms any input under 16px, so
+   form fields are pinned at 16px. */
+@media (max-width: 640px) {
+  .micro { font-size: .86rem; }
+  .cta-note, .form-note, .calc-note { font-size: .84rem; }
+  .offer-eyebrow { font-size: .68rem; }
+  .offer-note { font-size: .74rem; }
+  .article-meta { font-size: .84rem; }
+  .property-facts dt, .offer-stats dt { font-size: .68rem; }
+  table.data { font-size: .9rem; }
+  table.data th, table.data td { padding: 14px 16px; }
+}
+@media (max-width: 767px) {
+  .field input[type="text"], .field input[type="email"],
+  .field input[type="tel"], .field input[type="number"],
+  .field select, .field textarea { font-size: 16px; }
+}
+
+/* --- Rhythm -------------------------------------------------------------
+   Desktop section padding is generous by design. On a phone that reads as
+   dead space and adds a lot of scrolling. */
+@media (max-width: 640px) {
+  .section { padding-block: 56px; }
+  .section-sm { padding-block: 40px; }
+  .wrap { padding-inline: 20px; }
+  .section-head { margin-bottom: var(--sp-4); }
+  .split, .split-wide { gap: var(--sp-4); }
+  .hero.has-photo .hero-inner { padding-block: 56px 96px; }
+  .footer-cta { padding-block: 56px; }
+  .card { padding: var(--sp-3); }
+  .steps .step { padding: var(--sp-3) 0; }
+}
+
+/* --- Horizontal scroll containers --------------------------------------
+   Wide tables scroll inside their own container. Make that obvious with a
+   fade on the right edge, and never let the page itself scroll sideways. */
+html, body { overflow-x: hidden; }
+.table-wrap { position: relative; }
+@media (max-width: 900px) {
+  .table-wrap::after {
+    content: ""; position: absolute; top: 0; right: 0; bottom: 0;
+    width: 34px; pointer-events: none;
+    background: linear-gradient(90deg, transparent, var(--white));
+  }
+  .bg-stone .table-wrap::after,
+  .calc-panel.is-quiet .table-wrap::after {
+    background: linear-gradient(90deg, transparent, var(--stone-50));
+  }
+  .table-wrap { scroll-snap-type: x proximity; }
+}
+
+/* --- Stat bars ----------------------------------------------------------- */
+@media (max-width: 640px) {
+  .stats-float-wrap { margin-top: -40px; }
+  .stats-float .stat { padding: var(--sp-3) var(--sp-2); }
+  .stat-num { font-size: 1.55rem; }
+  .stat-label { font-size: .72rem; letter-spacing: .07em; }
+}
+
+/* --- Markets map --------------------------------------------------------- */
+@media (max-width: 640px) {
+  .usmap { min-width: 460px; }
+  .usmap-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+}
+
+/* --- Calculator ---------------------------------------------------------- */
+@media (max-width: 640px) {
+  .calc-panel { padding: var(--sp-3); }
+  .calc-drag-num { font-size: 2.4rem; }
+  .calc-row { font-size: .9rem; padding: 13px 0; }
+  .calc-row dd { font-size: .95rem; }
+}
+
+/* --- Offer widget -------------------------------------------------------
+   The full card measured 672px tall at 375x812, covering most of the screen.
+   On a phone it now opens as the bubble and only expands to the card when
+   the visitor taps it. */
+@media (max-width: 767px) {
+  .offer {
+    width: calc(100vw - 24px);
+    right: 12px;
+    max-height: calc(100vh - 190px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .offer-video { aspect-ratio: 16 / 7; }
+  .offer-stats { grid-template-columns: 1fr 1fr; }
+  .offer, .offer-bubble { bottom: 82px; }
+}
+
+/* --- Article body -------------------------------------------------------- */
+@media (max-width: 640px) {
+  .article-hero { padding-block: 36px 32px; }
+  .article-body > h2 { margin-top: var(--sp-4); }
+  .insight-block { padding: var(--sp-3); margin: var(--sp-4) 0; }
+  .article-next { gap: var(--sp-2); }
+}
+
+/* --- Draft banner -------------------------------------------------------- */
+@media (max-width: 640px) {
+  .draft-bar { font-size: .72rem; padding: 8px 0; text-align: left; }
+}
+
+/* --- Team profiles ------------------------------------------------------- */
+@media (max-width: 700px) {
+  .profile { padding: var(--sp-3) 0; }
+  .profile-photo { max-width: 130px; }
+}
+
+/* --- Video ---------------------------------------------------------------- */
+@media (max-width: 640px) {
+  .video-feature { gap: var(--sp-3); }
+  .video-grid { gap: var(--sp-3); }
+}
+
+/* --- P25. Mobile: nothing under 12px, nothing under 44px ----------------
+   Second pass, after measuring at 375px. Small uppercase labels were
+   landing between 9.9px and 11.8px, and two close buttons were well under
+   the 44px touch floor. */
+@media (max-width: 767px) {
+  .stat-label      { font-size: .78rem; }
+  .cmp-badge       { font-size: .76rem; padding: 5px 9px; }
+  .offer-live      { font-size: .76rem; }
+  .offer-eyebrow   { font-size: .75rem; }
+  .offer-note      { font-size: .76rem; }
+  .offer-stats dt  { font-size: .76rem; }
+  .video-card .video-meta,
+  .insight-meta,
+  .acard .cat,
+  .article-cat     { font-size: .74rem; }
+  .property-status { font-size: .72rem; }
+  .footer-legal    { font-size: .82rem; }
+  .footer-bottom   { font-size: .82rem; }
+
+  /* Touch floor on the two dismiss controls */
+  .modal-close, .offer-close {
+    width: 46px; height: 46px; box-sizing: border-box; font-size: 1.4rem;
+  }
+  .offer-close { margin: -8px -8px -8px 0; }
+  .modal-close { top: 6px; right: 6px; }
+
+  /* Footer contact links were 18px tall */
+  .footer-col a, .site-footer .micro a {
+    display: inline-flex; align-items: center; min-height: 44px;
+  }
+  .site-footer .micro a { min-height: 44px; }
+}
+
+/* Landscape phones: the sticky bar and the widget both want the bottom
+   edge, and there is very little height to share. */
+@media (max-height: 480px) and (orientation: landscape) {
+  .offer, .offer-bubble { display: none; }
+  .hero.has-photo .hero-inner { padding-block: 40px 72px; }
+}
+
+/* --- P26. Mobile collapsed state ----------------------------------------
+   On a phone the card does not open on its own. A labelled pill sits in the
+   corner instead, so the offering stays one tap away without occupying the
+   screen. The circular video bubble remains the desktop collapsed state,
+   where it is only seen after someone dismisses the card. */
+.offer-pill {
+  position: fixed; right: 14px; bottom: 82px; z-index: 94;
+  display: none; align-items: center; gap: 9px;
+  padding: 12px 18px 12px 15px;
+  border: 0; border-radius: 999px;
+  background: var(--navy-900);
+  color: #fff;
+  font-family: var(--f-body); font-size: .84rem; font-weight: 600;
+  letter-spacing: .01em; text-align: left; cursor: pointer;
+  box-shadow: 0 4px 14px rgba(1,30,60,.28), 0 14px 34px -8px rgba(1,30,60,.42);
+  opacity: 0; visibility: hidden; transform: translateY(10px);
+  transition: opacity .35s var(--ease), transform .35s var(--ease), visibility .35s;
+  max-width: calc(100vw - 28px);
+}
+.offer-pill.is-open { opacity: 1; visibility: visible; transform: none; }
+.offer-pill-dot {
+  width: 9px; height: 9px; border-radius: 50%; flex: none;
+  background: #4ADE80;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .offer-pill.is-open .offer-pill-dot { animation: offerPulse 2.4s ease-out infinite; }
+}
+.offer-pill:active { transform: scale(.97); }
+
+/* Pill on phones, video bubble above that */
+@media (max-width: 767px) {
+  .offer-pill { display: inline-flex; }
+  .offer-bubble { display: none !important; }
+}
+@media (min-width: 768px) {
+  .offer-pill { display: none !important; }
+}
+
+/* --- P27. Grid children must be allowed to shrink -----------------------
+   Grid and flex items default to min-width:auto, so a wide child (a table,
+   a long unbroken string) forces the whole column wider than the viewport.
+   The calculator was overflowing by ~137px at 375 for exactly this reason. */
+.calc, .calc > *, .calc-panel,
+.split > *, .grid > *, .video-feature > *, .profile > * { min-width: 0; }
+.calc-panel dl, .calc-panel dd, .calc-row dd { min-width: 0; }
+.calc-row { flex-wrap: wrap; }
+
+@media (max-width: 767px) {
+  /* Comfortable, non-zooming form controls */
+  .field input[type="text"], .field input[type="email"],
+  .field input[type="tel"], .field input[type="number"],
+  .field select, .calc-panel input, .calc-panel select {
+    min-height: 46px; font-size: 16px;
+  }
+  .field textarea { min-height: 120px; font-size: 16px; }
+  .choice { padding: 14px 15px; }
+  .choice input { width: 20px; height: 20px; }
+
+  /* Range thumb wants to be finger-sized */
+  input[type="range"] { height: 6px; }
+  input[type="range"]::-webkit-slider-thumb { width: 28px; height: 28px; }
+  input[type="range"]::-moz-range-thumb { width: 28px; height: 28px; }
+
+  .switch { width: 54px; height: 30px; }
+  .switch i::after { width: 24px; height: 24px; }
+  .switch input:checked + i::after { transform: translateX(24px); }
+
+  .calc { gap: var(--sp-2); }
+  .calc-panel + .calc-panel { margin-top: var(--sp-2); }
+  .field-row { grid-template-columns: 1fr; }
+}
